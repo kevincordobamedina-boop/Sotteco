@@ -8,7 +8,7 @@
         protected function Conexion(){
             try {
                 // Cadena de Conexion Local
-				$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=prue","root","");
+				$conectar = $this->dbh = new PDO("mysql:host=sql108.infinityfree.com;dbname=if0_41366228_cordobas","if0_41366228","ts3c2w86");
                
 				return $conectar;
 			} catch (Exception $e) {
@@ -25,7 +25,7 @@
         /* Link del proyecto */
         public static function ruta(){
             //Local
-			return "http://localhost/";
+			return "https://sotteco-app.onrender.com/";
            
           
 		}
