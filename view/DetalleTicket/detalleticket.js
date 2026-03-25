@@ -306,21 +306,32 @@ function mostraryvalidar(id){
 
     /* TODO: Mostramos informacion del ticket en inputs */
     $.post("../../controller/ticket.php?op=mostrar", { tick_id : id }, function (data) {
-        data = JSON.parse(data);
-        $('#lblestado').html(data.tick_estado);
-        $('#lblnomusuario').html(data.usu_nom +' '+data.usu_ape);
-        $('#lblfechcrea').html(data.fech_crea);
+        console.log('Respuesta de ticket.php?op=mostrar:', data);
+        if (!data) {
+            swal("Error", "No se recibió información del ticket. Verifica si el ID es válido o si hay un error en el backend.", "error");
+            return;
+        }
+        try {
+            var parsed = JSON.parse(data);
+        } catch (e) {
+            swal("Error", "La respuesta no es un JSON válido. Revisa la consola para más detalles.", "error");
+            console.error('Error al parsear JSON:', e, data);
+            return;
+        }
+        $('#lblestado').html(parsed.tick_estado);
+        $('#lblnomusuario').html(parsed.usu_nom +' '+parsed.usu_ape);
+        $('#lblfechcrea').html(parsed.fech_crea);
 
-        $('#lblnomidticket').html("Detalle orden de trabajo - "+data.tick_id);
+        $('#lblnomidticket').html("Detalle orden de trabajo - "+parsed.tick_id);
 
-        $('#cat_nom').val(data.cat_nom);
-        $('#cats_nom').val(data.cats_nom);
-        $('#tick_titulo').val(data.tick_titulo);
-        $('#tickd_descripusu').summernote ('code',data.tick_descrip);
+        $('#cat_nom').val(parsed.cat_nom);
+        $('#cats_nom').val(parsed.cats_nom);
+        $('#tick_titulo').val(parsed.tick_titulo);
+        $('#tickd_descripusu').summernote ('code',parsed.tick_descrip);
 
-        $('#prio_nom').val(data.prio_nom);
+        $('#prio_nom').val(parsed.prio_nom);
 
-        if (data.tick_estado_texto == "Cerrado"){
+        if (parsed.tick_estado_texto == "Cerrado"){
             /* TODO: Ocultamos panel de detalle */
             $('#pnldetalle').hide();
         }
