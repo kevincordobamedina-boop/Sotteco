@@ -51,18 +51,8 @@ $(document).on("click",".btn-inline",function(){
 /* Mostrar datos antes de asignar */
 function asignar(tick_id){
     $.post("../../controller/ticket.php?op=mostrar_noencry", {tick_id : tick_id}, function (data) {
-        if (!data) {
-            swal("Error", "No se recibió información del ticket. Verifica si el ID es válido o si hay un error en el backend.", "error");
-            return;
-        }
-        try {
-            var parsed = JSON.parse(data);
-        } catch (e) {
-            swal("Error", "La respuesta no es un JSON válido. Revisa la consola para más detalles.", "error");
-            console.error('Error al parsear JSON en asignar:', e, data);
-            return;
-        }
-        $('#tick_id').val(parsed.tick_id);
+        data = JSON.parse(data);
+        $('#tick_id').val(data.tick_id);
 
         $('#mdltitulo').html('Asignar a tecnico');
         $("#modalasignar").modal('show');
