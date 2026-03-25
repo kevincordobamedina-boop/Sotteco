@@ -18,7 +18,7 @@ $(document).ready(function(){
                 'pdfHtml5'
                 ],
         "ajax":{
-            url: '../../controller/notificacion.php?op=listar',
+            url: '../../controller/Notificacion.php?op=listar',
             type : "post",
             dataType : "json",
             data: {usu_id : usu_id},
