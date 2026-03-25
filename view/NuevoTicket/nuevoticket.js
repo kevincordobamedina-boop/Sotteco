@@ -86,14 +86,30 @@ function guardaryeditar(e){
             processData: false,
             success: function(data){
                 console.log(data);
-                data = JSON.parse(data);
-                console.log(data[0].tick_id);
+                if (!data) return;
+                try {
+                    var parsed = JSON.parse(data);
+                } catch (e) {
+                    swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
+                    setTimeout(function(){
+                        window.location.href = "/index.php";
+                    }, 2000);
+                    return;
+                }
+                if (parsed.error && parsed.error === 'Sesión expirada') {
+                    swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
+                    setTimeout(function(){
+                        window.location.href = "/index.php";
+                    }, 2000);
+                    return;
+                }
+                console.log(parsed[0].tick_id);
 
                 /* TODO: Limpiar campos */
                 $('#tick_titulo').val('');
                 $('#tick_descrip').summernote('reset');
                 /* TODO: Alerta de Confirmacion */
-                swal("Correcto!", "Orden Registrada Correctamente: Nro-"+ data[0].tick_id, "success");
+                swal("Correcto!", "Orden Registrada Correctamente: Nro-"+ parsed[0].tick_id, "success");
 
                 $('#btnguardar').prop("disabled",false);
                 $('#btnguardar').html('Guardar');
