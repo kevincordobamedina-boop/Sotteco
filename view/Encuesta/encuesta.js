@@ -16,37 +16,21 @@ $(document).ready(function(){
 function listardetalle(tick_id){
     /* TODO: Mostra detalle de ticket */
     $.post("../../controller/ticket.php?op=mostrar_noencry", { tick_id : tick_id }, function (data) {
-        if (!data) return;
-        try {
-            var parsed = JSON.parse(data);
-        } catch (e) {
-            swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
-            setTimeout(function(){
-                window.location.href = "/index.php";
-            }, 2000);
-            return;
-        }
-        if (parsed.error && parsed.error === 'Sesión expirada') {
-            swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
-            setTimeout(function(){
-                window.location.href = "/index.php";
-            }, 2000);
-            return;
-        }
-        $('#lblestado').val(parsed.tick_estado_texto);
-        $('#lblnomusuario').val(parsed.usu_nom +' '+parsed.usu_ape);
-        $('#lblfechcrea').val(parsed.fech_crea);
-        $('#lblnomidticket').val(parsed.tick_id);
-        $('#cat_nom').val(parsed.cat_nom);
-        $('#cats_nom').val(parsed.cats_nom);
-        $('#tick_titulo').val(parsed.tick_titulo);
-        $('#prio_nom').val(parsed.prio_nom);
-        $('#lblfechcierre').val(parsed.fech_cierre);
+        data = JSON.parse(data);
+        $('#lblestado').val(data.tick_estado_texto);
+        $('#lblnomusuario').val(data.usu_nom +' '+data.usu_ape);
+        $('#lblfechcrea').val(data.fech_crea);
+        $('#lblnomidticket').val(data.tick_id);
+        $('#cat_nom').val(data.cat_nom);
+        $('#cats_nom').val(data.cats_nom);
+        $('#tick_titulo').val(data.tick_titulo);
+        $('#prio_nom').val(data.prio_nom);
+        $('#lblfechcierre').val(data.fech_cierre);
 
-        if (parsed.tick_estado_texto=='Abierto') {
+        if (data.tick_estado_texto=='Abierto') {
             window.open('http://localhost:90/PERSONAL_HelpDesk/','_self');
         }else{
-            if (parsed.tick_estre==null){
+            if (data.tick_estre==null){
 
             }else{
                 $('#panel1').hide();

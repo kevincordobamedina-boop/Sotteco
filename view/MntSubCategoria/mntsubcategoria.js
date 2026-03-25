@@ -120,26 +120,10 @@ function editar(cats_id){
 
     /* TODO: Mostrar Informacion en los inputs */
     $.post("../../controller/subcategoria.php?op=mostrar", {cats_id : cats_id}, function (data) {
-        if (!data) return;
-        try {
-            var parsed = JSON.parse(data);
-        } catch (e) {
-            swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
-            setTimeout(function(){
-                window.location.href = "/index.php";
-            }, 2000);
-            return;
-        }
-        if (parsed.error && parsed.error === 'Sesión expirada') {
-            swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
-            setTimeout(function(){
-                window.location.href = "/index.php";
-            }, 2000);
-            return;
-        }
-        $('#cats_id').val(parsed.cats_id);
-        $('#cat_id').val(parsed.cat_id).trigger('change');
-        $('#cats_nom').val(parsed.cats_nom);
+        data = JSON.parse(data);
+        $('#cats_id').val(data.cats_id);
+        $('#cat_id').val(data.cat_id).trigger('change');
+        $('#cats_nom').val(data.cats_nom);
     });
 
     /* TODO: Mostrar Modal */

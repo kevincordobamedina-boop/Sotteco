@@ -115,25 +115,9 @@ function editar(prio_id){
 
     /* TODO: Mostrar Informacion en los inputs */
     $.post("../../controller/prioridad.php?op=mostrar", {prio_id : prio_id}, function (data) {
-        if (!data) return;
-        try {
-            var parsed = JSON.parse(data);
-        } catch (e) {
-            swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
-            setTimeout(function(){
-                window.location.href = "/index.php";
-            }, 2000);
-            return;
-        }
-        if (parsed.error && parsed.error === 'Sesión expirada') {
-            swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
-            setTimeout(function(){
-                window.location.href = "/index.php";
-            }, 2000);
-            return;
-        }
-        $('#prio_id').val(parsed.prio_id);
-        $('#prio_nom').val(parsed.prio_nom);
+        data = JSON.parse(data);
+        $('#prio_id').val(data.prio_id);
+        $('#prio_nom').val(data.prio_nom);
     }); 
 
     /* TODO: Mostrar Modal */
