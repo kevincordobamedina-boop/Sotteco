@@ -1,4 +1,7 @@
 <?php
+// Ocultar errores y advertencias en producción
+error_reporting(0);
+ini_set('display_errors', 0);
     /* TODO:Cadena de Conexion */
     require_once("../config/conexion.php");
     /* TODO:Clases Necesarias */
@@ -411,8 +414,8 @@
 
                     $output["tick_estado_texto"] = $row["tick_estado"];
 
-                    $output["fech_crea"] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
-                    $output["fech_cierre"] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
+                    $output["fech_crea"] = $row["fech_crea"] ? date("d/m/Y H:i:s", strtotime($row["fech_crea"])) : "";
+                    $output["fech_cierre"] = $row["fech_cierre"] ? date("d/m/Y H:i:s", strtotime($row["fech_cierre"])) : "";
                     $output["usu_nom"] = $row["usu_nom"];
                     $output["usu_ape"] = $row["usu_ape"];
                     $output["cat_nom"] = $row["cat_nom"];
