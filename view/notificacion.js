@@ -10,7 +10,7 @@ function mostrar_notificacion(){
     formData.append('usu_id',$('#user_idx').val());
 
     $.ajax({
-        url: "../controller/Notificacion.php?op=mostrar",
+        url: "../../controller/Notificacion.php?op=mostrar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -26,7 +26,7 @@ function mostrar_notificacion(){
                     url: "https://sotteco-app.onrender.com/view/DetalleTicket/?ID="+data.tick_id
                 });
 
-                $.post("../controller/Notificacion.php?op=actualizar", {not_id : data.not_id}, function (data) {
+                $.post("../../controller/Notificacion.php?op=actualizar", {not_id : data.not_id}, function (data) {
 
                 });
             }
