@@ -8,7 +8,7 @@
         protected function Conexion(){
             try {
                 // Cadena de Conexion Local
-				$conectar = $this->dbh = new PDO("mysql:host=sql108.infinityfree.com;dbname=if0_41366228_cordobas","if0_41366228","ts3c2w86");
+				$conectar = $this->dbh = new PDO("mysql:host=mysql-sotteco.alwaysdata.net;dbname=sotteco_bd","sotteco","cordobasbanpro1234");
                
 				return $conectar;
 			} catch (Exception $e) {
