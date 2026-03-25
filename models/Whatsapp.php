@@ -1,7 +1,7 @@
 <?php
 /*TODO: llamada de las clases necesarias que se usaran en el envio del mail */
 require_once("../config/conexion.php");
-require_once("../Models/Ticket.php");
+require_once("../models/Ticket.php");
 
 class Whastapp extends Conectar{
 

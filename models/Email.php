@@ -7,10 +7,10 @@ use PHPMailer\PHPMailer\Exception;
 
 /*TODO: llamada de las clases necesarias que se usaran en el envio del mail */
 require_once("../config/conexion.php");
-require_once("../Models/Ticket.php");
-require_once("../Models/Usuario.php");
+require_once("../models/Ticket.php");
+require_once("../models/Usuario.php");
 
-require_once("../Models/tecnico.php");
+require_once("../models/tecnico.php");
 
 class Email extends PHPMailer{
 
