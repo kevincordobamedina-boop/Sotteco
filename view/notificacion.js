@@ -22,7 +22,19 @@ function mostrar_notificacion(){
             try {
                 var parsed = JSON.parse(data);
             } catch (e) {
+                // Si la respuesta no es JSON, probablemente es HTML de login
                 console.error('Error al parsear JSON en notificacion.js:', e, data);
+                swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
+                setTimeout(function(){
+                    window.location.href = "/index.php";
+                }, 2000);
+                return;
+            }
+            if (parsed.error && parsed.error === 'Sesión expirada') {
+                swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
+                setTimeout(function(){
+                    window.location.href = "/index.php";
+                }, 2000);
                 return;
             }
             $.notify({
