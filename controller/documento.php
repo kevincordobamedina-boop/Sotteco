@@ -1,7 +1,7 @@
 <?php
     /* llamada a las clases necesarias */
     require_once("../config/conexion.php");
-    require_once("../models/documento.php");
+    require_once("../models/Documento.php");
     $documento = new Documento();
 
     /*TODO: opciones del controlador */

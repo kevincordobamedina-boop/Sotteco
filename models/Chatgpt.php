@@ -1,6 +1,6 @@
 <?php
 
-    require_once("../Models/Ticket.php");
+    require_once("../models/Ticket.php");
 
     class Chatgpt extends Conectar{
 

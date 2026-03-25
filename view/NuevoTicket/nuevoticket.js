@@ -71,6 +71,12 @@ function guardaryeditar(e){
             formData.append("files[]", $('#fileElem')[0].files[i]);
         }
 
+        // Mostrar el contenido del FormData antes de enviarlo
+        console.log('Contenido del FormData a enviar:');
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ':', pair[1]);
+        }
+
         /* TODO: Guardar Ticket */
         $.ajax({
             url: "../../controller/ticket.php?op=insert",
