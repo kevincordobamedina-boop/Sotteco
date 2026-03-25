@@ -23,7 +23,7 @@ function mostrar_notificacion(){
                 $.notify({
                     icon: 'glyphicon glyphicon-star',
                     message: data.not_mensaje,
-                    url: "http://localhost/view/DetalleTicket/?ID="+data.tick_id
+                    url: "https://sotteco-app.onrender.com/view/DetalleTicket/?ID="+data.tick_id
                 });
 
                 $.post("../../controller/Notificacion.php?op=actualizar", {not_id : data.not_id}, function (data) {
