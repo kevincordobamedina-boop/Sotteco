@@ -121,14 +121,30 @@ function editar(usu_id){
     /* TODO: Mostrar Informacion en los inputs */
     $.post("../../controller/usuario.php?op=mostrar", {usu_id : usu_id}, function (data) {
         console.log(data);
-        data = JSON.parse(data);
-        $('#usu_id').val(data.usu_id);
-        $('#usu_nom').val(data.usu_nom);
-        $('#usu_ape').val(data.usu_ape);
-        $('#usu_correo').val(data.usu_correo);
-        $('#usu_pass').val(data.usu_pass);
-        $('#rol_id').val(data.rol_id).trigger('change');
-        $('#usu_telf').val(data.usu_telf);
+        if (!data) return;
+        try {
+            var parsed = JSON.parse(data);
+        } catch (e) {
+            swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
+            setTimeout(function(){
+                window.location.href = "/index.php";
+            }, 2000);
+            return;
+        }
+        if (parsed.error && parsed.error === 'Sesión expirada') {
+            swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
+            setTimeout(function(){
+                window.location.href = "/index.php";
+            }, 2000);
+            return;
+        }
+        $('#usu_id').val(parsed.usu_id);
+        $('#usu_nom').val(parsed.usu_nom);
+        $('#usu_ape').val(parsed.usu_ape);
+        $('#usu_correo').val(parsed.usu_correo);
+        $('#usu_pass').val(parsed.usu_pass);
+        $('#rol_id').val(parsed.rol_id).trigger('change');
+        $('#usu_telf').val(parsed.usu_telf);
     }); 
 
     /* TODO: Mostrar Modal */

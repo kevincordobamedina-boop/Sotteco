@@ -117,9 +117,25 @@ function editar(cat_id){
 
     /* TODO: Mostrar Informacion en los inputs */
     $.post("../../controller/categoria.php?op=mostrar", {cat_id : cat_id}, function (data) {
-        data = JSON.parse(data);
-        $('#cat_id').val(data.cat_id);
-        $('#cat_nom').val(data.cat_nom);
+        if (!data) return;
+        try {
+            var parsed = JSON.parse(data);
+        } catch (e) {
+            swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
+            setTimeout(function(){
+                window.location.href = "/index.php";
+            }, 2000);
+            return;
+        }
+        if (parsed.error && parsed.error === 'Sesión expirada') {
+            swal("Sesión expirada", "Por favor, inicia sesión nuevamente.", "warning");
+            setTimeout(function(){
+                window.location.href = "/index.php";
+            }, 2000);
+            return;
+        }
+        $('#cat_id').val(parsed.cat_id);
+        $('#cat_nom').val(parsed.cat_nom);
     }); 
 
     /* TODO: Mostrar Modal */
