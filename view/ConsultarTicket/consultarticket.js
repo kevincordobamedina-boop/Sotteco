@@ -45,7 +45,7 @@ $(document).ready(function(){
 /*  Link para poder ver el detalle de ticket en otra ventana */
 $(document).on("click",".btn-inline",function(){
     const ciphertext = $(this).data("ciphertext");
-    window.open('http://localhost:80/view/DetalleTicket/?ID='+ ciphertext +'');
+    window.open('https://sotteco-app.onrender.com/view/DetalleTicket/?ID='+ ciphertext +'');
 });
 
 /* Mostrar datos antes de asignar */
