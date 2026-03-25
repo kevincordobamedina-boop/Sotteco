@@ -35,8 +35,5 @@ function mostrar_notificacion(){
 
 }
 
-setInterval(function(){
-    mostrar_notificacion();
-}, 5000);
 
 
