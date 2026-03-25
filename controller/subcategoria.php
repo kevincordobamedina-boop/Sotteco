@@ -1,10 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION['usu_id'])) {
-    header('Content-Type: application/json');
-    echo json_encode(['error' => 'Sesión expirada']);
-    exit;
-}
     /* TODO:Cadena de Conexion */
     require_once("../config/conexion.php");
     /* TODO:Modelo Subcategoria */
